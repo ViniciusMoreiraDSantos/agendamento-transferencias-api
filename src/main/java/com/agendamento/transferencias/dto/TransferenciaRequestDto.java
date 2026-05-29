@@ -7,6 +7,10 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 @Data
 public class TransferenciaRequestDto {
+    @AssertTrue(message = "Conta de origem e destino não podem ser iguais")
+    public boolean isContasDiferentes() {
+        return contaOrigem == null || contaDestino == null || !contaOrigem.equals(contaDestino);
+    }
     @NotBlank(message = "Conta origem é obrigatória")
     @Pattern(regexp = "\\d{10}" , message = "A conta deve 10 digitos numericos")
     private String contaOrigem;
